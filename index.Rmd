@@ -73,23 +73,46 @@ Las barras deben estar ordenadas de mayor (a la izquierda o arriba) a menor (a l
 - Cantidad de casos en cada barra.
 
 ```{r}
+library(ggplot2)
 
+ggplot(ca_covid19, aes(x=reorder(pais, -positivos), y=positivos))+
+  geom_col()+ geom_text(aes(label=positivos), vjust=-0.3, size=3.5) +
+  ggtitle("Casos positivos de Covid-19 en centroamérica y Rep. Dominicana")+ xlab("Paises")+ ylab("Casos positivos")+
+  theme_classic() + theme(plot.title = element_text(hjust = 0.5, size = 11, face = "bold"), legend.position = c(0.9, 0.8))
 ```
 
 ```{r}
-
+ggplot(ca_covid19, aes(x=reorder(pais, -recuperados), y=recuperados))+
+  geom_col()+ geom_text(aes(label=recuperados), vjust=-0.3, size=3.5) +
+  ggtitle("Casos recuperados de Covid-19 en centroamérica y Rep. Dominicana")+ xlab("Paises")+ ylab("Casos recuperados")+
+  theme_classic() + theme(plot.title = element_text(hjust = 0.5, size = 11, face = "bold"), legend.position = c(0.9, 0.8))
 ```
 
 ```{r}
-
+ggplot(ca_covid19, aes(x=reorder(pais, -recuperados), y=recuperados))+
+  geom_col()+ geom_text(aes(label=recuperados), vjust=-0.3, size=3.5) +
+  ggtitle("Casos recuperados de Covid-19 en centroamérica y Rep. Dominicana")+ xlab("Paises")+ ylab("Casos recuperados")+
+  theme_classic() + theme(plot.title = element_text(hjust = 0.5, size = 11, face = "bold"), legend.position = c(0.9, 0.8))
 ```
 
 ```{r}
-
+ggplot(ca_covid19, aes(x=reorder(pais, -fallecidos), y=fallecidos))+
+  geom_col()+ geom_text(aes(label=fallecidos), vjust=-0.3, size=3.5) +
+  ggtitle("Casos fallecidos de Covid-19 en centroamérica y Rep. Dominicana")+ xlab("Paises")+ ylab("Casos fallecidos")+
+  theme_classic() + theme(plot.title = element_text(hjust = 0.5, size = 11, face = "bold"), legend.position = c(0.9, 0.8))
 ```
 
 4. (10% - OPCIONAL) Genere un solo gráfico de barras que presente los cuatros tipos de casos, ya sea en barras apiladas o agrupadas.
 
 ```{r}
+library(tidyr)
+library(ggplot2)
+#Reune datos en tres columnas 
+Covid <- gather(ca_covid19, factores, frecuencia, -1)
 
+ggplot(Covid, aes(x = pais, y = frecuencia, fill = factores)) +
+  geom_col(position = "dodge")+
+  ggtitle("Casos Covid-19 en centroamérica y Rep. Dominicana")+ xlab("Paises")+ ylab("Número de casos")+
+  theme_classic() + theme(plot.title = element_text(hjust = 0.5, size = 11, face = "bold"), legend.position = c(0.955, 0.8))
+ 
 ```
